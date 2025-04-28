@@ -1,66 +1,40 @@
-2025-04-28 15:21:27.248340+02:00 jdbc[106]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), pokemon_coin integer not null, primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), pokemon_coin integer not null, primary key (user_id)) [42001-232]
-2025-04-28 15:21:27.255940+02:00 jdbc[106]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:23:38.649798+02:00 jdbc[116]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:23:38.652028+02:00 jdbc[116]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:24:29.563886+02:00 jdbc[126]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:24:29.566130+02:00 jdbc[126]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:26:20.240883+02:00 jdbc[136]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:26:20.242629+02:00 jdbc[136]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:31:29.175748+02:00 jdbc[146]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:31:29.177698+02:00 jdbc[146]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:32:27.029298+02:00 jdbc[156]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:32:27.031559+02:00 jdbc[156]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:32:28.927324+02:00 jdbc[166]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:32:28.929055+02:00 jdbc[166]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:37:33.748258+02:00 jdbc[176]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:37:33.752439+02:00 jdbc[176]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:37:35.757784+02:00 jdbc[186]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:37:35.759722+02:00 jdbc[186]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:37:53.134921+02:00 jdbc[196]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:37:53.136798+02:00 jdbc[196]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
-2025-04-28 15:39:54.835642+02:00 jdbc[206]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id))"; expected "identifier"; SQL statement:
-create table user (user_id varchar(255) not null, firstname varchar(255), lastname varchar(255), password varchar(255), pokemon_coin integer not null, username varchar(255), primary key (user_id)) [42001-232]
-2025-04-28 15:39:54.837964+02:00 jdbc[206]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
-alter table if exists pokemon_record add constraint FK8m7piyon9h8q8fwmv5islgbmn foreign key (user_id) references user [42001-232]
+2025-04-29 00:28:48.939078+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    create table [*]user (\000a        user_id UUID not null,\000a        created_at date,\000a        firstname varchar(255),\000a        lastname varchar(255),\000a        password varchar(255),\000a        pokemon_coin integer not null,\000a        username varchar(255),\000a        primary key (user_id)\000a    )"; expected "identifier"; SQL statement:
+
+    create table user (
+        user_id UUID not null,
+        created_at date,
+        firstname varchar(255),
+        lastname varchar(255),
+        password varchar(255),
+        pokemon_coin integer not null,
+        username varchar(255),
+        primary key (user_id)
+    ) [42001-232]
+2025-04-29 00:28:48.944143+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    alter table if exists pokemon_record \000a       add constraint FK8m7piyon9h8q8fwmv5islgbmn \000a       foreign key (user_id) \000a       references [*]user"; expected "identifier"; SQL statement:
+
+    alter table if exists pokemon_record 
+       add constraint FK8m7piyon9h8q8fwmv5islgbmn 
+       foreign key (user_id) 
+       references user [42001-232]
+2025-04-29 00:29:45.821862+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    create table [*]user (\000a        user_id UUID not null,\000a        created_at date,\000a        firstname varchar(255),\000a        lastname varchar(255),\000a        password varchar(255),\000a        pokemon_coin integer not null,\000a        username varchar(255),\000a        primary key (user_id)\000a    )"; expected "identifier"; SQL statement:
+
+    create table user (
+        user_id UUID not null,
+        created_at date,
+        firstname varchar(255),
+        lastname varchar(255),
+        password varchar(255),
+        pokemon_coin integer not null,
+        username varchar(255),
+        primary key (user_id)
+    ) [42001-232]
+2025-04-29 00:29:45.824969+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    alter table if exists pokemon_record \000a       add constraint FK8m7piyon9h8q8fwmv5islgbmn \000a       foreign key (user_id) \000a       references [*]user"; expected "identifier"; SQL statement:
+
+    alter table if exists pokemon_record 
+       add constraint FK8m7piyon9h8q8fwmv5islgbmn 
+       foreign key (user_id) 
+       references user [42001-232]

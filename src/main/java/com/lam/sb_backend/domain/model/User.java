@@ -8,13 +8,14 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class User {
-    private String userId;
+    private UUID userId;
     private String username;
     private String password;
     private LocalDate createdAt;

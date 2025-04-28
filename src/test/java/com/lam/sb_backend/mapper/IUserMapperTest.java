@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,10 +19,13 @@ class IUserMapperTest {
 
     User user;
 
+    UUID id;
+
     @BeforeEach
     void setUp() {
+        id = UUID.randomUUID();
         userDto = new UserDTO(
-                "userId",
+                id,
                 "username",
                 LocalDate.of(2023, 5, 20),
                 "firstname",
@@ -44,7 +48,7 @@ class IUserMapperTest {
     @Test
     void dtoToEntity() {
         UserEntity userEntity = IUserMapper.INSTANCE.dtoToEntity(userDto);
-        assertEquals("userId", userEntity.getUserId());
+        assertEquals(id, userEntity.getUserId());
         assertNull(userEntity.getPassword());
         assertEquals(2023, userEntity.getCreatedAt().getYear());
         assertEquals(5, userEntity.getCreatedAt().getMonthValue());
@@ -61,9 +65,9 @@ class IUserMapperTest {
     @Test
     void modelToDto() {
         user = IUserMapper.INSTANCE.dtoToModel(userDto);
-        assertEquals("userId", user.getUserId());
+        assertEquals(id, user.getUserId());
         UserDTO result = IUserMapper.INSTANCE.modelToDto(user);
-        assertEquals("userId", result.userId());
+        assertEquals(id, result.userId());
     }
 
     @Test
@@ -74,7 +78,7 @@ class IUserMapperTest {
         user.setPassword("password");
 
         userEntity = IUserMapper.INSTANCE.modelToEntity(user);
-        assertEquals("userId", userEntity.getUserId());
+        assertEquals(id, userEntity.getUserId());
         assertEquals("username", userEntity.getUsername());
         assertEquals("firstname", userEntity.getFirstname());
         assertEquals("lastname", userEntity.getLastname());
@@ -87,7 +91,7 @@ class IUserMapperTest {
         userEntity.setPassword("password");
 
         user = IUserMapper.INSTANCE.entityToModel(userEntity);
-        assertEquals("userId", userEntity.getUserId());
+        assertEquals(id, userEntity.getUserId());
         assertEquals("username", userEntity.getUsername());
         assertEquals("firstname", userEntity.getFirstname());
         assertEquals("lastname", userEntity.getLastname());

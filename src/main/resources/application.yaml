@@ -13,11 +13,14 @@ spring:
     password: ""
 
   jpa:
-    #database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
 
   h2:
     console:

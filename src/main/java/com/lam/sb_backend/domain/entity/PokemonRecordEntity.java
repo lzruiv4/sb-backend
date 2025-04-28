@@ -15,6 +15,8 @@ import java.util.UUID;
 public class PokemonRecordEntity {
 
     @Id
+    @GeneratedValue
+    @Column(columnDefinition = "UUID", updatable = false, nullable = false)
     private UUID recordId;
     private String pokemonId;
     private LocalDate captureTime;
