@@ -1,0 +1,60 @@
+package com.lam.sb_backend.mapper;
+
+import com.lam.sb_backend.domain.dto.PokemonRecordDTO;
+import com.lam.sb_backend.domain.dto.UserDTO;
+import com.lam.sb_backend.domain.entity.PokemonRecordEntity;
+import com.lam.sb_backend.domain.model.PokemonRecord;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class IPokemonRecordMapperTest {
+
+    PokemonRecord pokemonRecord;
+    PokemonRecordEntity pokemonRecordEntity;
+    PokemonRecordDTO pokemonRecordDTO;
+
+    UUID RECORD_ID;
+    UserDTO userDTO = new UserDTO(
+            UUID.randomUUID(),
+            "username",
+            LocalDate.of(2023, 5, 20),
+            "firstname",
+            "lastname",
+            10
+    );
+
+    @BeforeEach
+    void setUp() {
+        RECORD_ID = UUID.randomUUID();
+        pokemonRecord = new PokemonRecord();
+        pokemonRecordEntity = new PokemonRecordEntity();
+
+        pokemonRecordDTO = new PokemonRecordDTO(
+                RECORD_ID,
+                "pokemonId",
+                LocalDate.of(2025, 4, 29),
+                userDTO.userId(),
+                false
+        );
+    }
+
+    @Test
+    void entityToDTO() {
+        pokemonRecordEntity = IPokemonRecordMapper.INSTANCE.dtoToEntity(pokemonRecordDTO);
+        assertNull(pokemonRecordEntity.getUserEntity()); // Here is null, because user is ignore.
+        pokemonRecordEntity.setUserEntity(IUserMapper.INSTANCE.dtoToEntity(userDTO));
+        pokemonRecordDTO = IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordEntity);
+        assertEquals(userDTO.userId(), pokemonRecordDTO.userId());
+        assertEquals(RECORD_ID, pokemonRecordDTO.recordId());
+        assertEquals("pokemonId", pokemonRecordDTO.pokemonId());
+        assertEquals(LocalDate.of(2025, 4, 29), pokemonRecordDTO.captureTime());
+        assertFalse(pokemonRecordDTO.isRelease());
+    }
+
+    // TODO : Add more tests
+}

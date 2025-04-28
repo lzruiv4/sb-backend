@@ -22,7 +22,7 @@ public class PokemonRecordEntity {
     private LocalDate captureTime;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="userId")
-    private UserEntity user;
+    private UserEntity userEntity;
     private boolean isRelease;
 
 }
