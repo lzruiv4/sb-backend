@@ -3,7 +3,7 @@ package com.lam.sb_backend.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +19,7 @@ public class PokemonRecordEntity {
     @Column(columnDefinition = "UUID", updatable = false, nullable = false)
     private UUID recordId;
     private String pokemonId;
-    private LocalDate captureTime;
+    private LocalDateTime captureTime;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="userId")
     private UserEntity userEntity;

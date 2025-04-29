@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,15 +36,14 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public UserDTO addNewUser(User user) {
+        user.setCreatedAt(LocalDateTime.now());
         UserEntity savedUserEntity = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(savedUserEntity);
     }
 
     @Override
     public UserDTO updateUser(User user) {
-        UserEntity userEntity = userRepository.findById(user.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-
+        userRepository.findById(user.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         UserEntity updatedUser = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(updatedUser);
     }

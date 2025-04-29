@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -23,7 +23,7 @@ public class UserEntity {
     private UUID userId;
     private String username;
     private String password;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private String firstname;
     private String lastname;
     private int pokemonCoin;

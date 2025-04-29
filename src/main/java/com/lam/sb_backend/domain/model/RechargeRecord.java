@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -17,5 +17,5 @@ public class RechargeRecord {
     private User user;
     private int amountRecharge;
     private int currentPokeCoin;
-    private LocalDate rechargeAt;
+    private LocalDateTime rechargeAt;
 }

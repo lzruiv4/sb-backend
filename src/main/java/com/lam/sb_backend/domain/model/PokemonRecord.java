@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class PokemonRecord {
     private UUID recordId;
     private String pokemonId;
-    private LocalDate captureTime;
+    private LocalDateTime captureTime;
     private User user;
     private boolean isRelease;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -26,5 +26,5 @@ public class RechargeRecordEntity {
     private UserEntity userEntity;
     private int amountRecharge;
     private int currentPokeCoin;
-    private LocalDate rechargeAt;
+    private LocalDateTime rechargeAt;
 }

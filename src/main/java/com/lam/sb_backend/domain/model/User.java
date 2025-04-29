@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class User {
     private UUID userId;
     private String username;
     private String password;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private String firstname;
     private String lastname;
     private int pokemonCoin;

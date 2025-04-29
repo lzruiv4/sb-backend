@@ -6,7 +6,7 @@ import com.lam.sb_backend.domain.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,13 +21,15 @@ class IUserMapperTest {
 
     UUID id;
 
+    LocalDateTime testTime = LocalDateTime.now();
+
     @BeforeEach
     void setUp() {
         id = UUID.randomUUID();
         userDto = new UserDTO(
                 id,
                 "username",
-                LocalDate.of(2023, 5, 20),
+                testTime,
                 "firstname",
                 "lastname",
                 10
@@ -50,9 +52,9 @@ class IUserMapperTest {
         UserEntity userEntity = IUserMapper.INSTANCE.dtoToEntity(userDto);
         assertEquals(id, userEntity.getUserId());
         assertNull(userEntity.getPassword());
-        assertEquals(2023, userEntity.getCreatedAt().getYear());
-        assertEquals(5, userEntity.getCreatedAt().getMonthValue());
-        assertEquals(20, userEntity.getCreatedAt().getDayOfMonth());
+        assertEquals(testTime.getYear(), userEntity.getCreatedAt().getYear());
+        assertEquals(testTime.getMonthValue(), userEntity.getCreatedAt().getMonthValue());
+        assertEquals(testTime.getDayOfMonth(), userEntity.getCreatedAt().getDayOfMonth());
     }
 
     @Test

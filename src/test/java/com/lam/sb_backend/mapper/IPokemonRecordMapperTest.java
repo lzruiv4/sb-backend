@@ -7,7 +7,7 @@ import com.lam.sb_backend.domain.model.PokemonRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,14 +19,16 @@ public class IPokemonRecordMapperTest {
     PokemonRecordDTO pokemonRecordDTO;
 
     UUID RECORD_ID;
+    LocalDateTime testTime = LocalDateTime.now();
     UserDTO userDTO = new UserDTO(
             UUID.randomUUID(),
             "username",
-            LocalDate.of(2023, 5, 20),
+            testTime,
             "firstname",
             "lastname",
             10
     );
+
 
     @BeforeEach
     void setUp() {
@@ -37,7 +39,7 @@ public class IPokemonRecordMapperTest {
         pokemonRecordDTO = new PokemonRecordDTO(
                 RECORD_ID,
                 "pokemonId",
-                LocalDate.of(2025, 4, 29),
+                testTime,
                 userDTO.userId(),
                 false
         );
@@ -52,7 +54,7 @@ public class IPokemonRecordMapperTest {
         assertEquals(userDTO.userId(), pokemonRecordDTO.userId());
         assertEquals(RECORD_ID, pokemonRecordDTO.recordId());
         assertEquals("pokemonId", pokemonRecordDTO.pokemonId());
-        assertEquals(LocalDate.of(2025, 4, 29), pokemonRecordDTO.captureTime());
+        assertEquals(testTime, pokemonRecordDTO.captureTime());
         assertFalse(pokemonRecordDTO.isRelease());
     }
 
