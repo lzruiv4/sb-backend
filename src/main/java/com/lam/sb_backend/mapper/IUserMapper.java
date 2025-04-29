@@ -16,11 +16,13 @@ public interface IUserMapper {
 
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "pokemonMap", ignore = true)
+    @Mapping(target = "rechargeRecordMap", ignore = true)
     User dtoToModel(UserDTO userDTO);
 
     UserEntity modelToEntity(User user);
 
     @Mapping(target = "pokemonMap", ignore = true)
+    @Mapping(target = "rechargeRecordMap", ignore = true)
     User entityToModel(UserEntity userEntity);
 
     UserDTO entityToDto(UserEntity userEntity);

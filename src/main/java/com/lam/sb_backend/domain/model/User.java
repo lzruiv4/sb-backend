@@ -23,4 +23,5 @@ public class User {
     private String lastname;
     private int pokemonCoin;
     private Map<LocalDate, List<PokemonRecord>> pokemonMap;
+    private Map<LocalDate, List<RechargeRecord>> rechargeRecordMap;
 }
