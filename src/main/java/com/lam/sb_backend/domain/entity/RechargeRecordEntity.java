@@ -1,7 +1,6 @@
 package com.lam.sb_backend.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "recharge_record")
-@AllArgsConstructor
+@Table(name = "SB_RECHARGE_RECORD")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,10 +19,10 @@ public class RechargeRecordEntity {
     @UuidGenerator
     @Column(columnDefinition = "UUID", nullable = false, updatable = false)
     private UUID rechargeRecordId;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userId")
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity userEntity;
     private int amountRecharge;
-    private int currentPokeCoin;
+    private int currentPokemonCoin;
     private LocalDateTime rechargeAt;
 }

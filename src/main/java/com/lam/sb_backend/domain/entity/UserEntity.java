@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "pokemon_user")
+@Table(name = "SB_USER")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

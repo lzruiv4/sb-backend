@@ -7,18 +7,18 @@ import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IUserRepository;
 import com.lam.sb_backend.service.IUserService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Service
 public class UserServiceImp implements IUserService {
 
-    @Autowired
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
 
     @Override
     public UserDTO getUserById(UUID userId) {

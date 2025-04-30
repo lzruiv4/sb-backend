@@ -3,7 +3,7 @@ package com.lam.sb_backend.controller;
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private IUserService iUserService;
+    private final IUserService iUserService;
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable UUID userId){

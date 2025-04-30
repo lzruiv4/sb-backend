@@ -7,8 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name="pokemonRecord")
-@AllArgsConstructor
+@Table(name="SB_POKEMON_RECORD")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -21,7 +20,7 @@ public class PokemonRecordEntity {
     private String pokemonId;
     private LocalDateTime captureTime;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity userEntity;
     private boolean isRelease;
 

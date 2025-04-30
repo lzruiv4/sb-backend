@@ -16,6 +16,7 @@ public interface IRechargeRecordMapper {
     RechargeRecordDTO modelToDto(RechargeRecord rechargeRecord);
 
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "currentPokemonCoin", ignore = true)
     RechargeRecord dtoToModel(RechargeRecordDTO rechargeRecordDTO);
 
     @Mapping(target = "userEntity", source = "user")
@@ -24,15 +25,10 @@ public interface IRechargeRecordMapper {
     @Mapping(target = "user", source = "userEntity")
     RechargeRecord entityToModel(RechargeRecordEntity rechargeRecordEntity);
 
-    /**
-     * No need to use currently。
-     *
-     * We make it only from DTO -> Model -> Entity
-     *                  Or Entity -> Model -> DTO
-     * */
-//    @Mapping(target = "userId", source = "rechargeRecordEntity.userId")
-//    RechargeRecordDTO entityToDto(RechargeRecordEntity rechargeRecordEntity);
+    @Mapping(target = "userId", source = "userEntity.userId")
+    RechargeRecordDTO entityToDto(RechargeRecordEntity rechargeRecordEntity);
 
-//    @Mapping(target = "userEntity", ignore = true)
-//    RechargeRecordEntity dtoToEntity(RechargeRecordDTO rechargeRecordDTO);
+    @Mapping(target = "userEntity", ignore = true)
+    @Mapping(target = "currentPokemonCoin", ignore = true)
+    RechargeRecordEntity dtoToEntity(RechargeRecordDTO rechargeRecordDTO);
 }
