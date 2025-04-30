@@ -12,8 +12,10 @@ public interface IUserMapper {
 
     IUserMapper INSTANCE = Mappers.getMapper(IUserMapper.class);
 
+    @Mapping(target = "id", source = "userId")
     UserDTO modelToDto(User user);
 
+    @Mapping(target = "userId", source = "id")
     @Mapping(target = "password", ignore = true)
     @Mapping(target = "pokemonMap", ignore = true)
     @Mapping(target = "rechargeRecordMap", ignore = true)
@@ -25,8 +27,10 @@ public interface IUserMapper {
     @Mapping(target = "rechargeRecordMap", ignore = true)
     User entityToModel(UserEntity userEntity);
 
+    @Mapping(target = "id", source = "userId")
     UserDTO entityToDto(UserEntity userEntity);
 
+    @Mapping(target = "userId", source = "id")
     @Mapping(target = "password", ignore = true)
     UserEntity dtoToEntity(UserDTO userDTO);
 

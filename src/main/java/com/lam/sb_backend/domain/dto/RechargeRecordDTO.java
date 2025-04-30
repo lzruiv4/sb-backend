@@ -7,6 +7,7 @@ public record RechargeRecordDTO(
         UUID rechargeRecordId,
         UUID userId,
         int amountRecharge,
+        int currentPokemonCoin,
         LocalDateTime rechargeAt
 ) {
 }

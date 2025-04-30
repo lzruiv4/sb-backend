@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record UserDTO(
-        UUID userId,
+        UUID id,
         String username,
         LocalDateTime createdAt,
         String firstname,

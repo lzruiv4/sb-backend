@@ -40,7 +40,7 @@ public class IPokemonRecordMapperTest {
                 RECORD_ID,
                 "pokemonId",
                 testTime,
-                userDTO.userId(),
+                userDTO.id(),
                 false
         );
     }
@@ -51,7 +51,7 @@ public class IPokemonRecordMapperTest {
         assertNull(pokemonRecordEntity.getUserEntity()); // Here is null, because user is ignore.
         pokemonRecordEntity.setUserEntity(IUserMapper.INSTANCE.dtoToEntity(userDTO));
         pokemonRecordDTO = IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordEntity);
-        assertEquals(userDTO.userId(), pokemonRecordDTO.userId());
+        assertEquals(userDTO.id(), pokemonRecordDTO.userId());
         assertEquals(RECORD_ID, pokemonRecordDTO.recordId());
         assertEquals("pokemonId", pokemonRecordDTO.pokemonId());
         assertEquals(testTime, pokemonRecordDTO.captureTime());

@@ -69,7 +69,7 @@ class IUserMapperTest {
         user = IUserMapper.INSTANCE.dtoToModel(userDto);
         assertEquals(id, user.getUserId());
         UserDTO result = IUserMapper.INSTANCE.modelToDto(user);
-        assertEquals(id, result.userId());
+        assertEquals(id, result.id());
     }
 
     @Test

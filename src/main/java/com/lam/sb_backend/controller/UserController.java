@@ -35,8 +35,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userToBeAdd);
     }
 
-    @PutMapping
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO){
         return ResponseEntity.ok(iUserService.updateUser(IUserMapper.INSTANCE.dtoToModel(userDTO)));
     }
 }
