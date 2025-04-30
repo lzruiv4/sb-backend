@@ -25,6 +25,10 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
 
     @Override
     public RechargeRecordDTO addRechargeRecord(UUID userId, int amountRecharge) {
+        if(amountRecharge <= 0) {
+            throw new RuntimeException("Amount recharge must be greater than 0");
+        }
+
         UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();

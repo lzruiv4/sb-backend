@@ -19,7 +19,7 @@ public class PokemonRecordEntity {
     private UUID recordId;
     private String pokemonId;
     private LocalDateTime captureTime;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity userEntity;
     private boolean isRelease;
