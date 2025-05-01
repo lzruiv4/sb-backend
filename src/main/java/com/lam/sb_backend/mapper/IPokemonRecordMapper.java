@@ -11,10 +11,12 @@ import org.mapstruct.factory.Mappers;
 public interface IPokemonRecordMapper {
     IPokemonRecordMapper INSTANCE = Mappers.getMapper(IPokemonRecordMapper.class);
 
+    @Mapping(target = "id", source = "pokemonCaptureRecordId")
     @Mapping(target = "userId", source = "user.userId")
     @Mapping(target = "isRelease", source = "release")
     PokemonRecordDTO modelToDto(PokemonRecord pokemonRecord);
 
+    @Mapping(target = "pokemonCaptureRecordId", source = "id")
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "release", source = "isRelease")
     PokemonRecord dtoToModel(PokemonRecordDTO pokemonRecordDTO);
@@ -27,10 +29,12 @@ public interface IPokemonRecordMapper {
     @Mapping(target = "release", source = "release")
     PokemonRecord entityToModel(PokemonRecordEntity pokemonRecordEntity);
 
+    @Mapping(target = "id", source = "pokemonCaptureRecordId")
     @Mapping(target = "userId", source = "userEntity.userId")
     @Mapping(target = "isRelease", source = "release")
     PokemonRecordDTO entityToDto(PokemonRecordEntity pokemonRecordEntity);
 
+    @Mapping(target = "pokemonCaptureRecordId", source = "id")
     @Mapping(target = "userEntity", ignore = true)
     @Mapping(target = "release", source = "isRelease")
     PokemonRecordEntity dtoToEntity(PokemonRecordDTO pokemonRecordDTO);

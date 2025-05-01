@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record PokemonRecordDTO(
-        UUID recordId,
+        UUID id,
         String pokemonId,
         LocalDateTime captureTime,
         UUID userId,

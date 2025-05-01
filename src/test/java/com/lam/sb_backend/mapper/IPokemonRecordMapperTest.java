@@ -52,7 +52,7 @@ public class IPokemonRecordMapperTest {
         pokemonRecordEntity.setUserEntity(IUserMapper.INSTANCE.dtoToEntity(userDTO));
         pokemonRecordDTO = IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordEntity);
         assertEquals(userDTO.id(), pokemonRecordDTO.userId());
-        assertEquals(RECORD_ID, pokemonRecordDTO.recordId());
+        assertEquals(RECORD_ID, pokemonRecordDTO.id());
         assertEquals("pokemonId", pokemonRecordDTO.pokemonId());
         assertEquals(testTime, pokemonRecordDTO.captureTime());
         assertFalse(pokemonRecordDTO.isRelease());

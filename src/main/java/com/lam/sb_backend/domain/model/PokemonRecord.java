@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class PokemonRecord {
-    private UUID recordId;
+    private UUID pokemonCaptureRecordId;
     private String pokemonId;
     private LocalDateTime captureTime;
     private User user;
