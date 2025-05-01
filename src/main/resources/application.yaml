@@ -33,3 +33,8 @@ spring:
 # Launch the default browser when starting the application in development mode
 #vaadin:
 #  launch-browser: true
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+#  api-docs:
+#    path: /v3/api-docs

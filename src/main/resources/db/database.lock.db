@@ -1,6 +1,6 @@
 #FileLock
-#Thu May 01 13:47:04 UTC 2025
+#Fri May 02 00:44:00 CEST 2025
+server=192.168.0.160\:55479
 hostName=mbp-zray
-id=1968c19d065793ecdb940a523f08a47b80b5d2b4c7a
 method=file
-server=192.168.0.160\:60602
+id=1968e0562fab1cbd84ef092268a540a2f4c65b3d0c5

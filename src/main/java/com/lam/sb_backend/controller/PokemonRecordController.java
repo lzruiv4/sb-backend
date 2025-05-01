@@ -3,6 +3,7 @@ package com.lam.sb_backend.controller;
 import com.lam.sb_backend.domain.dto.PokemonRecordDTO;
 import com.lam.sb_backend.mapper.IPokemonRecordMapper;
 import com.lam.sb_backend.service.IPokemonRecordService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/pokemonRecords")
+@Tag(name="Pokemon record", description = "Pokemon record management")
 public class PokemonRecordController {
 
     private final IPokemonRecordService iPokemonRecordService;
