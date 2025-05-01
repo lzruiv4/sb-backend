@@ -12,9 +12,11 @@ public interface IRechargeRecordMapper {
 
     IRechargeRecordMapper INSTANCE = Mappers.getMapper(IRechargeRecordMapper.class);
 
+    @Mapping(target = "id", source = "rechargeRecordId")
     @Mapping(target = "userId", source = "user.userId")
     RechargeRecordDTO modelToDto(RechargeRecord rechargeRecord);
 
+    @Mapping(target = "rechargeRecordId", source = "id")
     @Mapping(target = "user", ignore = true)
     RechargeRecord dtoToModel(RechargeRecordDTO rechargeRecordDTO);
 
@@ -24,9 +26,11 @@ public interface IRechargeRecordMapper {
     @Mapping(target = "user", source = "userEntity")
     RechargeRecord entityToModel(RechargeRecordEntity rechargeRecordEntity);
 
+    @Mapping(target = "id", source = "rechargeRecordId")
     @Mapping(target = "userId", source = "userEntity.userId")
     RechargeRecordDTO entityToDto(RechargeRecordEntity rechargeRecordEntity);
 
+    @Mapping(target = "rechargeRecordId", source = "id")
     @Mapping(target = "userEntity", ignore = true)
     RechargeRecordEntity dtoToEntity(RechargeRecordDTO rechargeRecordDTO);
 }
