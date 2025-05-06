@@ -35,7 +35,7 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
         pokemonRecord.setCaptureTime(LocalDateTime.now());
 
         PokemonRecordEntity result = pokemonRecordRepository.save(IPokemonRecordMapper.INSTANCE.modelToEntity(pokemonRecord));
-        userService.updateUser(currentUser);
+        userService.updateUser(userId, currentUser);
         return IPokemonRecordMapper.INSTANCE.entityToDto(result);
     }
 

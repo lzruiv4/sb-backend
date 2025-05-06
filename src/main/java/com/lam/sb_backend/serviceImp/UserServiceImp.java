@@ -42,8 +42,9 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public UserDTO updateUser(User user) {
-        userRepository.findById(user.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    public UserDTO updateUser(UUID userId, User user) {
+        userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        user.setUserId(userId);
         UserEntity updatedUser = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(updatedUser);
     }

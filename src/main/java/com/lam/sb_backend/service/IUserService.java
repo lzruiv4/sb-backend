@@ -14,7 +14,7 @@ public interface IUserService {
 
     UserDTO addNewUser(User user);
 
-    UserDTO updateUser(User user);
+    UserDTO updateUser(UUID userId, User user);
 
     //TODO: Maybe later add delect the user
 }

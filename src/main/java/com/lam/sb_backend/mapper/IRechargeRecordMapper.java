@@ -17,7 +17,7 @@ public interface IRechargeRecordMapper {
     RechargeRecordDTO modelToDto(RechargeRecord rechargeRecord);
 
     @Mapping(target = "rechargeRecordId", source = "id")
-    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "user.userId", source = "userId")
     RechargeRecord dtoToModel(RechargeRecordDTO rechargeRecordDTO);
 
     @Mapping(target = "userEntity", source = "user")
@@ -31,6 +31,6 @@ public interface IRechargeRecordMapper {
     RechargeRecordDTO entityToDto(RechargeRecordEntity rechargeRecordEntity);
 
     @Mapping(target = "rechargeRecordId", source = "id")
-    @Mapping(target = "userEntity", ignore = true)
+    @Mapping(target = "userEntity.userId", source = "userId")
     RechargeRecordEntity dtoToEntity(RechargeRecordDTO rechargeRecordDTO);
 }

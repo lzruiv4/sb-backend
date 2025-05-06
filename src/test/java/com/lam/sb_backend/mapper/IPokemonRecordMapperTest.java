@@ -23,6 +23,7 @@ public class IPokemonRecordMapperTest {
     UserDTO userDTO = new UserDTO(
             UUID.randomUUID(),
             "username",
+            "password",
             testTime,
             "firstname",
             "lastname",
@@ -48,7 +49,11 @@ public class IPokemonRecordMapperTest {
     @Test
     void entityToDTO() {
         pokemonRecordEntity = IPokemonRecordMapper.INSTANCE.dtoToEntity(pokemonRecordDTO);
-        assertNull(pokemonRecordEntity.getUserEntity()); // Here is null, because user is ignore.
+        assertNotNull(pokemonRecordEntity.getUserEntity().getUserId());
+        assertNotNull(pokemonRecordEntity.getUserEntity());
+        assertNull(pokemonRecordEntity.getUserEntity().getPassword());
+        assertNull(pokemonRecordEntity.getUserEntity().getLastname());
+        assertNull(pokemonRecordEntity.getUserEntity().getFirstname());
         pokemonRecordEntity.setUserEntity(IUserMapper.INSTANCE.dtoToEntity(userDTO));
         pokemonRecordDTO = IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordEntity);
         assertEquals(userDTO.id(), pokemonRecordDTO.userId());

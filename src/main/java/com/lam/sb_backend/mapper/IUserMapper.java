@@ -16,7 +16,6 @@ public interface IUserMapper {
     UserDTO modelToDto(User user);
 
     @Mapping(target = "userId", source = "id")
-    @Mapping(target = "password", ignore = true)
     @Mapping(target = "pokemonMap", ignore = true)
     @Mapping(target = "rechargeRecordMap", ignore = true)
     User dtoToModel(UserDTO userDTO);
@@ -31,7 +30,6 @@ public interface IUserMapper {
     UserDTO entityToDto(UserEntity userEntity);
 
     @Mapping(target = "userId", source = "id")
-    @Mapping(target = "password", ignore = true)
     UserEntity dtoToEntity(UserDTO userDTO);
 
 }

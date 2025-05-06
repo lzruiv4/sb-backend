@@ -17,7 +17,7 @@ public interface IPokemonRecordMapper {
     PokemonRecordDTO modelToDto(PokemonRecord pokemonRecord);
 
     @Mapping(target = "pokemonCaptureRecordId", source = "id")
-    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "user.userId", source = "userId")
     @Mapping(target = "release", source = "isRelease")
     PokemonRecord dtoToModel(PokemonRecordDTO pokemonRecordDTO);
 
@@ -35,7 +35,7 @@ public interface IPokemonRecordMapper {
     PokemonRecordDTO entityToDto(PokemonRecordEntity pokemonRecordEntity);
 
     @Mapping(target = "pokemonCaptureRecordId", source = "id")
-    @Mapping(target = "userEntity", ignore = true)
+    @Mapping(target = "userEntity.userId", source = "userId")
     @Mapping(target = "release", source = "isRelease")
     PokemonRecordEntity dtoToEntity(PokemonRecordDTO pokemonRecordDTO);
 }

@@ -44,6 +44,6 @@ public class UserController {
     @PutMapping("/{userId}")
     @Operation(summary = "Update user info", description = "Returns updated user information")
     public ResponseEntity<UserDTO> updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO){
-        return ResponseEntity.ok(iUserService.updateUser(IUserMapper.INSTANCE.dtoToModel(userDTO)));
+        return ResponseEntity.ok(iUserService.updateUser(userId, IUserMapper.INSTANCE.dtoToModel(userDTO)));
     }
 }
