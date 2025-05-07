@@ -29,7 +29,9 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
             throw new RuntimeException("Amount recharge must be greater than 0");
         }
 
-        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        UserEntity userEntity = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();
         rechargeRecordEntity.setAmountRecharge(amountRecharge);
@@ -47,7 +49,9 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
     @Override
     public List<RechargeRecordDTO> getAllRechargeRecordByUserId(UUID userId) {
         return rechargeRecordRepository.findAll().stream()
-                .filter(rechargeRecordEntity -> rechargeRecordEntity.getUserEntity().getUserId().equals(userId))
+                .filter(
+                        rechargeRecordEntity
+                                -> rechargeRecordEntity.getUserEntity().getUserId().equals(userId))
                 .map(IRechargeRecordMapper.INSTANCE::entityToDto)
                 .toList();
     }
