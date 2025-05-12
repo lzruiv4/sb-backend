@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     @Operation(summary = "Get user info by userId", description = "Returns basic user information")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable UUID userId){
+    public ResponseEntity<UserDTO> getUserById(@PathVariable("userId") UUID userId){
         UserDTO userDTO = iUserService.getUserById(userId);
         return ResponseEntity.ok(userDTO);
     }
@@ -43,7 +43,7 @@ public class UserController {
 
     @PutMapping("/{userId}")
     @Operation(summary = "Update user info", description = "Returns updated user information")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> updateUser(@PathVariable("userId") UUID userId, @RequestBody UserDTO userDTO){
         return ResponseEntity.ok(iUserService.updateUser(userId, IUserMapper.INSTANCE.dtoToModel(userDTO)));
     }
 }

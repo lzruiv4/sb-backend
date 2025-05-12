@@ -26,7 +26,7 @@ public class RechargeRecordController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RechargeRecordDTO>> getAllRechargeRecordsByUserId(@RequestParam UUID userId) {
+    public ResponseEntity<List<RechargeRecordDTO>> getAllRechargeRecordsByUserId(@RequestParam("userId") UUID userId) {
         return ResponseEntity.ok(iRechargeRecordService.getAllRechargeRecordByUserId(userId));
     }
 }

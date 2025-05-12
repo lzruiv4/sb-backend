@@ -29,12 +29,12 @@ public class PokemonRecordController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PokemonRecordDTO>> getPokemonRecordsByUserId(@RequestParam UUID userId) {
+    public ResponseEntity<List<PokemonRecordDTO>> getPokemonRecordsByUserId(@RequestParam("userId") UUID userId) {
         return ResponseEntity.ok(iPokemonRecordService.getPokemonRecordsByUserId(userId));
     }
 
     @PutMapping("/{pokemonRecordId}")
-    public ResponseEntity<PokemonRecordDTO> updatePokemonRecordStatus(@PathVariable UUID pokemonRecordId) {
+    public ResponseEntity<PokemonRecordDTO> updatePokemonRecordStatus(@PathVariable("pokemonRecordId") UUID pokemonRecordId) {
         return ResponseEntity.ok(iPokemonRecordService.changeReleaseToTrue(pokemonRecordId));
     }
 }
