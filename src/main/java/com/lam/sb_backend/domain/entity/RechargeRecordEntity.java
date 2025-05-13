@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "SB_RECHARGE_RECORD")
+@Table(name = "sb_recharge_record")
 @NoArgsConstructor
 @Getter
 @Setter

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name="SB_POKEMON_RECORD")
+@Table(name="sb_pokemon_record")
 @NoArgsConstructor
 @Getter
 @Setter
