@@ -23,10 +23,8 @@ public class UserEntity {
     private UUID userId;
     private String username;
     private String password;
-//    @Column(name = "created_at")
     private LocalDateTime createdAt;
     private String firstname;
     private String lastname;
-//    @Column(name = "pokemon_coin")
     private int pokemonCoin;
 }
