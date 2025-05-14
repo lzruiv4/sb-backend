@@ -1,0 +1,22 @@
+spring:
+# H2
+  datasource:
+    url: jdbc:h2:file:./src/main/resources/db/database;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: 123
+    password: ""
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        # format_sql: true
+
+  h2:
+    console:
+      enabled: true
+#  path: /db

@@ -1,0 +1,17 @@
+spring:
+    # PostgreSQL
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sb
+    username: sa
+    password:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
