@@ -8,6 +8,10 @@ import com.lam.sb_backend.repository.IUserRepository;
 import com.lam.sb_backend.service.IUserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -48,4 +52,14 @@ public class UserServiceImp implements IUserService {
         UserEntity updatedUser = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(updatedUser);
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        return new org.springframework.security.core.userdetails.User(
+//                userEntity.getUsername(),
+//                userEntity.getPassword(),
+//                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+//        );
+//    }
 }
