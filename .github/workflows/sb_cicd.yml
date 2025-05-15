@@ -3,7 +3,7 @@ name: SB_BACKEND CICD
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build_and_test:
