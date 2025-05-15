@@ -8,8 +8,8 @@ server:
 spring:
   profiles:
     active:
-      - devDockerPostgres
-#      - h2
+#      - devDockerPostgres
+      - h2
 #      - devLocalPostgres
 
 #  mustache:
