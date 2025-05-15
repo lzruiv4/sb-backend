@@ -36,3 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 .DS_Store
+
+### H2 ###
+src/main/resources/db/database.lock.db
+src/main/resources/db/database.trace.db
