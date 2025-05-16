@@ -1,9 +1,8 @@
-package com.lam.sb_backend.serviceImp;
+package com.lam.sb_backend.util.auth;
 
 import com.lam.sb_backend.domain.dto.RegisterRequestDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
 import com.lam.sb_backend.repository.IUserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-//@RequiredArgsConstructor
 public class RoleService implements UserDetailsService {
 
     @Autowired

@@ -3,8 +3,9 @@ package com.lam.sb_backend.controller;
 import com.lam.sb_backend.domain.dto.AuthResponseDTO;
 import com.lam.sb_backend.domain.dto.LoginRequestDTO;
 import com.lam.sb_backend.domain.dto.RegisterRequestDTO;
-import com.lam.sb_backend.serviceImp.JwtService;
-import com.lam.sb_backend.serviceImp.RoleService;
+import com.lam.sb_backend.util.auth.JwtService;
+import com.lam.sb_backend.util.auth.RoleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,14 +15,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class LoginController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private JwtService jwtService;
+//    @Autowired
+    private final AuthenticationManager authenticationManager;
+//    @Autowired
+    private final RoleService roleService;
+//    @Autowired
+    private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequestDTO request) {
