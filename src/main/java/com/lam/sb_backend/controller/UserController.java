@@ -34,12 +34,18 @@ public class UserController {
         return ResponseEntity.ok(iUserService.getAllUsers());
     }
 
-//    @PostMapping
-//    @Operation(summary = "Create a new user", description = "Create an user by basic information")
-//    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
-//        UserDTO userToBeAdd = iUserService.addNewUser(IUserMapper.INSTANCE.dtoToModel(userDTO));
-//        return ResponseEntity.status(HttpStatus.CREATED).body(userToBeAdd);
-//    }
+    @PostMapping
+    @Deprecated
+    @Operation(
+            summary = "Create a new user",
+            description = "This api is deprecated, because one can register or login by AuthenticationController.  " +
+                    "Create an user by basic information",
+            deprecated = true
+    )
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
+        UserDTO userToBeAdd = iUserService.addNewUser(IUserMapper.INSTANCE.dtoToModel(userDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userToBeAdd);
+    }
 
     @PutMapping("/{userId}")
     @Operation(summary = "Update user info", description = "Returns updated user information")
