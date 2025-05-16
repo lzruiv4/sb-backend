@@ -31,7 +31,6 @@ public interface IUserMapper {
     UserDTO entityToDto(UserEntity userEntity);
 
     @Mapping(target = "userId", source = "id")
-    @Mapping(target = "roles", ignore = true)
     UserEntity dtoToEntity(UserDTO userDTO);
 
 }

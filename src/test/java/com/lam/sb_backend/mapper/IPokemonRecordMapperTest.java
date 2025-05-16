@@ -3,11 +3,14 @@ package com.lam.sb_backend.mapper;
 import com.lam.sb_backend.domain.dto.PokemonRecordDTO;
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.PokemonRecordEntity;
+import com.lam.sb_backend.domain.enums.Role;
 import com.lam.sb_backend.domain.model.PokemonRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +23,7 @@ public class IPokemonRecordMapperTest {
 
     UUID RECORD_ID;
     LocalDateTime testTime = LocalDateTime.now();
+    Set<Role> roles = new HashSet<>();
     UserDTO userDTO = new UserDTO(
             UUID.randomUUID(),
             "username",
@@ -27,7 +31,8 @@ public class IPokemonRecordMapperTest {
             testTime,
             "firstname",
             "lastname",
-            10
+            10,
+            roles
     );
 
 
@@ -36,7 +41,6 @@ public class IPokemonRecordMapperTest {
         RECORD_ID = UUID.randomUUID();
         pokemonRecord = new PokemonRecord();
         pokemonRecordEntity = new PokemonRecordEntity();
-
         pokemonRecordDTO = new PokemonRecordDTO(
                 RECORD_ID,
                 "pokemonId",

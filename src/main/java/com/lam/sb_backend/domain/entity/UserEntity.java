@@ -1,5 +1,6 @@
 package com.lam.sb_backend.domain.entity;
 
+import com.lam.sb_backend.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,5 +32,6 @@ public class UserEntity {
     private int pokemonCoin;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
 }

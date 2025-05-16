@@ -1,4 +1,4 @@
-package com.lam.sb_backend.util.auth;
+package com.lam.sb_backend.security;
 
 import com.lam.sb_backend.domain.dto.UserRegisterDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
@@ -23,29 +23,32 @@ public class RoleService implements UserDetailsService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    public void register(UserRegisterDTO req) {
-        if (userRepository.findByUsername(req.username()).isPresent()) {
+    public void register(UserRegisterDTO userRegisterDTO) {
+        if (userRepository.findByUsername(userRegisterDTO.username()).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
         UserEntity newUserEntity = new UserEntity();
-        newUserEntity.setUsername(req.username());
-        newUserEntity.setPassword(passwordEncoder.encode(req.password()));
+        newUserEntity.setUsername(userRegisterDTO.username());
+        newUserEntity.setPassword(passwordEncoder.encode(userRegisterDTO.password()));
         newUserEntity.setCreatedAt(LocalDateTime.now());
-        newUserEntity.setFirstname(req.firstname());
-        newUserEntity.setLastname(req.lastname());
+        newUserEntity.setFirstname(userRegisterDTO.firstname());
+        newUserEntity.setLastname(userRegisterDTO.lastname());
         newUserEntity.setPokemonCoin(10);
-        newUserEntity.getRoles().add("ROLE_USER");
+        newUserEntity.getRoles().addAll(userRegisterDTO.roles());
         userRepository.save(newUserEntity);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(
-                userEntity.getUsername(),
-                userEntity.getPassword(),
-                userEntity.getRoles().stream().map(SimpleGrantedAuthority::new).toList()
-        );
+//        UserEntity userEntity = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//        return new org.springframework.security.core.userdetails.User(
+//                userEntity.getUsername(),
+//                userEntity.getPassword(),
+//                userEntity.getRoles().stream().map(SimpleGrantedAuthority::new).toList()
+//        );
+        return userRepository.findByUsername(username)
+                .map(RoleDetails::new)
+                .orElseThrow(() -> new UsernameNotFoundException("User name with " + username + "not found"));
     }
 }

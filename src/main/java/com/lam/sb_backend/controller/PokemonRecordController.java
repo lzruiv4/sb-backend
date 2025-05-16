@@ -2,7 +2,6 @@ package com.lam.sb_backend.controller;
 
 import com.lam.sb_backend.domain.dto.PokemonRecordCreateDTO;
 import com.lam.sb_backend.domain.dto.PokemonRecordDTO;
-import com.lam.sb_backend.mapper.IPokemonRecordMapper;
 import com.lam.sb_backend.service.IPokemonRecordService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

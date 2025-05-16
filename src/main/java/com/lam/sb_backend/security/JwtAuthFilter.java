@@ -1,4 +1,4 @@
-package com.lam.sb_backend.util.auth;
+package com.lam.sb_backend.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
