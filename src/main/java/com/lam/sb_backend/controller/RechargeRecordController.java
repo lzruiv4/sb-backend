@@ -4,7 +4,6 @@ import com.lam.sb_backend.domain.dto.RechargeRecordCreateDTO;
 import com.lam.sb_backend.domain.dto.RechargeRecordDTO;
 import com.lam.sb_backend.service.IRechargeRecordService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-//import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

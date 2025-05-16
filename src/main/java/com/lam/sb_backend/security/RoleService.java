@@ -1,7 +1,10 @@
 package com.lam.sb_backend.security;
 
 import com.lam.sb_backend.domain.dto.UserRegisterDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterResponseDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
+import com.lam.sb_backend.domain.enums.Role;
+import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -22,7 +25,7 @@ public class RoleService implements UserDetailsService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    public void register(UserRegisterDTO userRegisterDTO) {
+    public UserRegisterResponseDTO register(UserRegisterDTO userRegisterDTO) {
         if (userRepository.findByUsername(userRegisterDTO.username()).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
@@ -34,7 +37,8 @@ public class RoleService implements UserDetailsService {
         newUserEntity.setLastname(userRegisterDTO.lastname());
         newUserEntity.setPokemonCoin(10);
         newUserEntity.getRoles().addAll(userRegisterDTO.roles());
-        userRepository.save(newUserEntity);
+        UserEntity result = userRepository.save(newUserEntity);
+        return IUserMapper.INSTANCE.entityToUserRegisterResponseDTO(result);
     }
 
     @Override
