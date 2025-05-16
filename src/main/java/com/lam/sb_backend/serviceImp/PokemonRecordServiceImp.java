@@ -26,13 +26,17 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
     private final UserServiceImp userService;
 
     @Override
-    public PokemonRecordDTO createPokemonRecord(PokemonRecord pokemonRecord, UUID userId) {
+    public PokemonRecordDTO createPokemonRecord(String pokemonId, UUID userId) {
         UserDTO currentUserDTO = userService.getUserById(userId);
         User currentUser = IUserMapper.INSTANCE.dtoToModel(currentUserDTO);
         int currentCoin = currentUser.getPokemonCoin();
         currentUser.setPokemonCoin(currentCoin - 1);
-        pokemonRecord.setUser(currentUser);
+
+        PokemonRecord pokemonRecord = new PokemonRecord();
+        pokemonRecord.setPokemonId(pokemonId);
         pokemonRecord.setCaptureTime(LocalDateTime.now());
+        pokemonRecord.setUser(currentUser);
+        pokemonRecord.setRelease(false);
 
         PokemonRecordEntity result = pokemonRecordRepository.save(IPokemonRecordMapper.INSTANCE.modelToEntity(pokemonRecord));
         userService.updateUser(userId, currentUser);

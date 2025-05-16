@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IPokemonRecordService {
-    PokemonRecordDTO createPokemonRecord(PokemonRecord pokemonRecord, UUID userId);
+    PokemonRecordDTO createPokemonRecord(String pokemonId, UUID userId);
 
     PokemonRecordDTO changeReleaseToTrue(UUID pokemonRecordId);
 

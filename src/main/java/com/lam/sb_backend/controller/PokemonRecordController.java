@@ -1,5 +1,6 @@
 package com.lam.sb_backend.controller;
 
+import com.lam.sb_backend.domain.dto.PokemonRecordCreateDTO;
 import com.lam.sb_backend.domain.dto.PokemonRecordDTO;
 import com.lam.sb_backend.mapper.IPokemonRecordMapper;
 import com.lam.sb_backend.service.IPokemonRecordService;
@@ -20,11 +21,11 @@ public class PokemonRecordController {
     private final IPokemonRecordService iPokemonRecordService;
 
     @PostMapping
-    public ResponseEntity<PokemonRecordDTO> createPokemonRecord(@RequestBody PokemonRecordDTO pokemonRecordDTO) {
+    public ResponseEntity<PokemonRecordDTO> createPokemonRecord(@RequestBody PokemonRecordCreateDTO pokemonRecordCreateDTO) {
         return ResponseEntity.ok()
                 .body(iPokemonRecordService.createPokemonRecord(
-                        IPokemonRecordMapper.INSTANCE.dtoToModel(pokemonRecordDTO),
-                        pokemonRecordDTO.userId()
+                        pokemonRecordCreateDTO.pokemonId(),
+                        pokemonRecordCreateDTO.userId()
                 ));
     }
 
