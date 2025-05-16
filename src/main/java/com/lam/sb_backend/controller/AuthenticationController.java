@@ -1,12 +1,12 @@
 package com.lam.sb_backend.controller;
 
-import com.lam.sb_backend.domain.dto.AuthResponseDTO;
-import com.lam.sb_backend.domain.dto.LoginRequestDTO;
-import com.lam.sb_backend.domain.dto.RegisterRequestDTO;
+import com.lam.sb_backend.domain.dto.TokenDTO;
+import com.lam.sb_backend.domain.dto.UserLoginDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterDTO;
 import com.lam.sb_backend.util.auth.JwtService;
 import com.lam.sb_backend.util.auth.RoleService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class LoginController {
+@Tag(name="Authentication", description = "Authentication: User or manager")
+public class AuthenticationController {
 
 //    @Autowired
     private final AuthenticationManager authenticationManager;
@@ -26,17 +27,17 @@ public class LoginController {
     private final JwtService jwtService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<String> register(@RequestBody UserRegisterDTO request) {
         roleService.register(request);
         return ResponseEntity.ok("Registered successfully");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO request) {
+    public ResponseEntity<TokenDTO> login(@RequestBody UserLoginDTO request) {
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password())
         );
         String token = jwtService.generateToken(auth);
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+        return ResponseEntity.ok(new TokenDTO(token));
     }
 }

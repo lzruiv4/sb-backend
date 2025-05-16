@@ -1,6 +1,6 @@
 package com.lam.sb_backend.domain.dto;
 
-public record RegisterRequestDTO(
+public record UserRegisterDTO(
         String username,
         String firstname,
         String lastname,

@@ -1,6 +1,6 @@
 package com.lam.sb_backend.util.auth;
 
-import com.lam.sb_backend.domain.dto.RegisterRequestDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
 import com.lam.sb_backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class RoleService implements UserDetailsService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    public void register(RegisterRequestDTO req) {
+    public void register(UserRegisterDTO req) {
         if (userRepository.findByUsername(req.username()).isPresent()) {
             throw new RuntimeException("Username already exists");
         }

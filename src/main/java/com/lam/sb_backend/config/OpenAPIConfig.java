@@ -16,9 +16,9 @@ public class OpenAPIConfig {
 
         return new OpenAPI()
                 .info(new Info()
-                        .title("你的API标题")
+                        .title("POKEMON LOTTO API")
                         .version("1.0")
-                        .description("接口描述"))
+                        .description("API description"))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes(securitySchemeName,
