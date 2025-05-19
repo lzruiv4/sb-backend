@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: dev-postgres-db
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: sb
+    ports:
+      - "9999:5432"
+
+  backend:
+    image: lzruiv4/sb_backend:latest
+    container_name: sb_backend-app
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dev-postgres-db:5432/sb
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: 123
+    ports:
+      - "9090:9090"
+
+volumes:
+  postgres-data:

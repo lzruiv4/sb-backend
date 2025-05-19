@@ -1,5 +1,16 @@
 ## WIP
-    Make the authentication by spring security. ------> 50% Done
+    Make the authentication by spring security.
+
+##### Easy to run with docker compose
+Make sure you are in root file, and give this in console.
+```
+docker compse up -d
+```
+Now you can try with the Swaager UI link
+##### Swagger UI
+```
+http://localhost:9090/swagger-ui/index.html
+```
 
 ### Springboot backend
     1. Angular frontend 👉 https://github.com/lzruiv4/angular_study
@@ -20,8 +31,3 @@ Now have 3 options.
     postgres:15
     ~~~
 3. Postgresql in local
-
-##### Swagger UI
-```
-http://localhost:9090/swagger-ui/index.html
-```
