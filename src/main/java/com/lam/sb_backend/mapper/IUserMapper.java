@@ -1,6 +1,7 @@
 package com.lam.sb_backend.mapper;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterResponseDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
 import com.lam.sb_backend.domain.model.User;
 import org.mapstruct.Mapper;
@@ -20,6 +21,7 @@ public interface IUserMapper {
     @Mapping(target = "rechargeRecordMap", ignore = true)
     User dtoToModel(UserDTO userDTO);
 
+    @Mapping(target = "roles", ignore = true)
     UserEntity modelToEntity(User user);
 
     @Mapping(target = "pokemonMap", ignore = true)
@@ -31,5 +33,7 @@ public interface IUserMapper {
 
     @Mapping(target = "userId", source = "id")
     UserEntity dtoToEntity(UserDTO userDTO);
+
+    UserRegisterResponseDTO entityToUserRegisterResponseDTO(UserEntity userEntity);
 
 }

@@ -1,9 +1,25 @@
+## WIP
+    Make the authentication by spring security. ------> 50% Done
+
 ### Springboot backend
     1. Angular frontend 👉 https://github.com/lzruiv4/angular_study
     2. VUE frontend 👉 https://github.com/lzruiv4/vue3_study
 
 ##### Database
-The current data is stored in h2 and saved in ```resources/db/database.mv.db```
+Now have 3 options.
+1. H2 
+   - The current data is stored in h2 and saved in ```resources/db/database.mv.db```
+2. Postgresql from docker
+   - You can give this in console.
+    ~~~
+    docker run -d \
+    --name dev-postgres \
+    -e POSTGRES_USER=sa \
+    -e POSTGRES_DB=sb_db \
+    -p 9999:5432 \
+    postgres:15
+    ~~~
+3. Postgresql in local
 
 ##### Swagger UI
 ```

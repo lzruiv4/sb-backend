@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,13 +30,20 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Get all users", description = "Returns all users information, only for manager")
     public ResponseEntity<List<UserDTO>> getAllUsers(){
         return ResponseEntity.ok(iUserService.getAllUsers());
     }
 
     @PostMapping
-    @Operation(summary = "Create a new user", description = "Create an user by basic information")
+    @Deprecated
+    @Operation(
+            summary = "Create a new user",
+            description = "This api is deprecated, because one can register or login by AuthenticationController.  " +
+                    "Create an user by basic information",
+            deprecated = true
+    )
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
         UserDTO userToBeAdd = iUserService.addNewUser(IUserMapper.INSTANCE.dtoToModel(userDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(userToBeAdd);

@@ -2,11 +2,14 @@ package com.lam.sb_backend.mapper;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
+import com.lam.sb_backend.domain.enums.Role;
 import com.lam.sb_backend.domain.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,9 +26,12 @@ class IUserMapperTest {
 
     LocalDateTime testTime = LocalDateTime.now();
 
+    Set<Role> roles = new HashSet<>();
+
     @BeforeEach
     void setUp() {
         id = UUID.randomUUID();
+        roles.add(Role.ROLE_USER);
         userDto = new UserDTO(
                 id,
                 "username",
@@ -33,7 +39,8 @@ class IUserMapperTest {
                 testTime,
                 "firstname",
                 "lastname",
-                10
+                10,
+                roles
         );
 
         userEntity = new UserEntity();
