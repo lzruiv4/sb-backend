@@ -29,10 +29,11 @@ Now have 3 options.
    - You can give this in console.
     ~~~
     docker run -d \
-    --name dev-postgres \
-    -e POSTGRES_USER=sa \
-    -e POSTGRES_DB=sb_db \
-    -p 9999:5432 \
-    postgres:15
+   --name dev-postgres \
+   -e POSTGRES_USER=sa \
+   -e POSTGRES_PASSWORD=123 \
+   -e POSTGRES_DB=sb \
+   -p 9999:5432 \
+   postgres:15
     ~~~
 3. Postgresql in local
