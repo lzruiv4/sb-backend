@@ -3,7 +3,6 @@ package com.lam.sb_backend.security;
 import com.lam.sb_backend.domain.dto.UserRegisterDTO;
 import com.lam.sb_backend.domain.dto.UserRegisterResponseDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
-import com.lam.sb_backend.domain.enums.Role;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

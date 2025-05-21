@@ -1,6 +1,7 @@
 package com.lam.sb_backend.controller;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
+import com.lam.sb_backend.domain.enums.Role;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,6 +37,12 @@ public class UserController {
         return ResponseEntity.ok(iUserService.getAllUsers());
     }
 
+    @PutMapping("/{userId}")
+    @Operation(summary = "Update user info", description = "Returns updated user information")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable("userId") UUID userId, @RequestBody UserDTO userDTO){
+        return ResponseEntity.ok(iUserService.updateUser(userId, IUserMapper.INSTANCE.dtoToModel(userDTO)));
+    }
+
     @PostMapping
     @Deprecated
     @Operation(
@@ -47,11 +54,5 @@ public class UserController {
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
         UserDTO userToBeAdd = iUserService.addNewUser(IUserMapper.INSTANCE.dtoToModel(userDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(userToBeAdd);
-    }
-
-    @PutMapping("/{userId}")
-    @Operation(summary = "Update user info", description = "Returns updated user information")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable("userId") UUID userId, @RequestBody UserDTO userDTO){
-        return ResponseEntity.ok(iUserService.updateUser(userId, IUserMapper.INSTANCE.dtoToModel(userDTO)));
     }
 }

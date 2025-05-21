@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@Tag(name="Authentication", description = "Authentication: User or manager")
+@Tag(name="Authentication", description = "Authentication: User or admin")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
