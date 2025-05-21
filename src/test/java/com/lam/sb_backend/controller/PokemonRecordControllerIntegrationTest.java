@@ -2,7 +2,7 @@ package com.lam.sb_backend.controller;
 
 import com.lam.sb_backend.domain.dto.*;
 import com.lam.sb_backend.domain.enums.Role;
-import com.lam.sb_backend.repository.IRechargeRecordRepository;
+import com.lam.sb_backend.repository.IPokemonRecordRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class RechargeRecordControllerIntegrationTest {
-
+class PokemonRecordControllerIntegrationTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     @Autowired
-    private IRechargeRecordRepository iRechargeRecordRepository;
+    private IPokemonRecordRepository iPokemonRecordRepository;
 
     private HttpEntity<Void> withToken;
 
@@ -37,7 +36,7 @@ class RechargeRecordControllerIntegrationTest {
     @BeforeEach
     void setUp() {
         // delete db in every test
-        iRechargeRecordRepository.deleteAll();
+        iPokemonRecordRepository.deleteAll();
 
         // add an admin user to database
         Set<Role> roles = new HashSet<>();
@@ -70,55 +69,66 @@ class RechargeRecordControllerIntegrationTest {
         withToken = new HttpEntity<>(headers);
 
         userDTO = testRestTemplate.exchange(
-                "/api/users/" + adminTokenDTO.userId(),
-                HttpMethod.GET,
-                withToken,
-                UserDTO.class)
-                .getBody();
-    }
-
-    @Test
-    void testCreateAndGetAllRechargeRecords() {
-        // New user have 10 coins
-        assertEquals(10, userDTO.pokemonCoin());
-
-        // Add new recharge record
-        RechargeRecordCreateDTO rechargeRecordCreateDTO = new RechargeRecordCreateDTO(userDTO.id(), 1);
-        RechargeRecordDTO rechargeRecordDTO = testRestTemplate.exchange(
-                "/api/rechargeRecords",
-                HttpMethod.POST,
-                new HttpEntity<>(rechargeRecordCreateDTO, withToken.getHeaders()),
-                RechargeRecordDTO.class
-        ).getBody();
-        assertNotNull(rechargeRecordDTO.id());
-        assertEquals(1, rechargeRecordDTO.amountRecharge());
-        assertEquals(11, rechargeRecordDTO.currentPokemonCoin());
-        assertEquals(userDTO.id(), rechargeRecordDTO.userId());
-        assertNotNull(rechargeRecordDTO.rechargeAt());
-
-        userDTO = testRestTemplate.exchange(
-                        "/api/users/" + userDTO.id(),
+                        "/api/users/" + adminTokenDTO.userId(),
                         HttpMethod.GET,
                         withToken,
                         UserDTO.class)
                 .getBody();
-        assertEquals(11, userDTO.pokemonCoin());
 
-        // Add one more recharge record
+        // Add a pokemon record
         testRestTemplate.exchange(
-                "/api/rechargeRecords",
+                "/api/pokemonRecords",
                 HttpMethod.POST,
-                new HttpEntity<>(rechargeRecordCreateDTO, withToken.getHeaders()),
-                RechargeRecordDTO.class
+                new HttpEntity<>(
+                        new PokemonRecordCreateDTO("1", userDTO.id()),
+                        withToken.getHeaders()
+                ),
+                PokemonRecordDTO.class
         );
+    }
+
+    @Test
+    void testCreateAndGetAllPokemonRecords() {
+        // Add new pokemon record
+        PokemonRecordDTO pokemonRecordDTO = testRestTemplate.exchange(
+                "/api/pokemonRecords",
+                HttpMethod.POST,
+                new HttpEntity<>(new PokemonRecordCreateDTO("2", userDTO.id()), withToken.getHeaders()),
+                PokemonRecordDTO.class
+        ).getBody();
+        assertNotNull(pokemonRecordDTO.id());
+        assertEquals("2", pokemonRecordDTO.pokemonId());
+        assertNotNull(pokemonRecordDTO.captureTime());
+        assertEquals(userDTO.id(), pokemonRecordDTO.userId());
+        assertFalse(pokemonRecordDTO.isRelease());
+
         int recordMenge = testRestTemplate.exchange(
-                "/api/rechargeRecords?userId=" + userDTO.id(),
-                HttpMethod.GET,
-                withToken,
-                new ParameterizedTypeReference<List<RechargeRecordDTO>>() {})
+                        "/api/pokemonRecords?userId=" + userDTO.id(),
+                        HttpMethod.GET,
+                        withToken,
+                        new ParameterizedTypeReference<List<PokemonRecordDTO>>() {})
                 .getBody()
                 .size();
         assertEquals(2, recordMenge);
+    }
 
+    @Test
+    void testUpdateAPokemonRecord(){
+        PokemonRecordDTO pokemonRecordDTO = testRestTemplate.exchange(
+                        "/api/pokemonRecords?userId=" + userDTO.id(),
+                        HttpMethod.GET,
+                        withToken,
+                        new ParameterizedTypeReference<List<PokemonRecordDTO>>() {}
+                )
+                .getBody().get(0);
+
+        // Update pokemon record release to true
+        PokemonRecordDTO result = testRestTemplate.exchange(
+                "/api/pokemonRecords/" + pokemonRecordDTO.id(),
+                HttpMethod.PUT,
+                withToken,
+                PokemonRecordDTO.class
+        ).getBody();
+        assertTrue(result.isRelease());
     }
 }
