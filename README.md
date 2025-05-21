@@ -8,7 +8,7 @@ You can use the `ls` command to check whether there is `docker-compose.yml` curr
 P.S. Please make sure you have docker. And use the following command. 
 👇👇👇👇👇
 ```
-docker compse up -d
+docker compose up -d
 ```
 Once the container is created successfully, 
 you can use the following link to see if you can access swaager doc.
