@@ -3,6 +3,8 @@ package com.lam.sb_backend.serviceImp;
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
 import com.lam.sb_backend.domain.model.User;
+import com.lam.sb_backend.exception.ErrorCode;
+import com.lam.sb_backend.exception.SBException;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IUserRepository;
 import com.lam.sb_backend.service.IUserService;
@@ -24,7 +26,7 @@ public class UserServiceImp implements IUserService {
     public UserDTO getUserById(UUID userId) {
         return userRepository.findById(userId)
                 .map(IUserMapper.INSTANCE::entityToDto)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+                .orElseThrow(() -> new SBException(ErrorCode.USER_NOT_FOUND, "GET: User"));
     }
 
     @Override
@@ -43,7 +45,7 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public UserDTO updateUser(UUID userId, User user) {
-        userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        userRepository.findById(userId).orElseThrow(() -> new SBException(ErrorCode.USER_NOT_FOUND, "UPDATE: User"));
         user.setUserId(userId);
         UserEntity updatedUser = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(updatedUser);

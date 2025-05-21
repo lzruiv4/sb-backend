@@ -21,7 +21,7 @@ public interface IUserMapper {
     @Mapping(target = "rechargeRecordMap", ignore = true)
     User dtoToModel(UserDTO userDTO);
 
-    @Mapping(target = "roles", ignore = true)
+//    @Mapping(target = "roles", ignore = true)
     UserEntity modelToEntity(User user);
 
     @Mapping(target = "pokemonMap", ignore = true)
