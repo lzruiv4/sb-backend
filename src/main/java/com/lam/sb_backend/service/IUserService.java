@@ -16,5 +16,7 @@ public interface IUserService {
 
     UserDTO updateUser(UUID userId, User user);
 
+    void updatePassword(UUID userId, String oldPassword, String newPassword);
+
     //TODO: Maybe later add delete the user
 }

@@ -35,7 +35,7 @@ class IUserMapperTest {
         userDto = new UserDTO(
                 id,
                 "username",
-                "password",
+//                "password",
                 testTime,
                 "firstname",
                 "lastname",
@@ -50,7 +50,7 @@ class IUserMapperTest {
     @Test
     void entityToDto() {
         userEntity = IUserMapper.INSTANCE.dtoToEntity(userDto);
-        assertEquals("password", userEntity.getPassword());
+//        assertEquals("password", userEntity.getPassword());
         UserDTO result = IUserMapper.INSTANCE.entityToDto(userEntity);
         assertEquals(10, result.pokemonCoin());
     }
@@ -59,7 +59,7 @@ class IUserMapperTest {
     void dtoToEntity() {
         UserEntity userEntity = IUserMapper.INSTANCE.dtoToEntity(userDto);
         assertEquals(id, userEntity.getUserId());
-        assertEquals("password", userEntity.getPassword());
+//        assertEquals("password", userEntity.getPassword());
         assertEquals(testTime.getYear(), userEntity.getCreatedAt().getYear());
         assertEquals(testTime.getMonthValue(), userEntity.getCreatedAt().getMonthValue());
         assertEquals(testTime.getDayOfMonth(), userEntity.getCreatedAt().getDayOfMonth());
@@ -68,7 +68,7 @@ class IUserMapperTest {
     @Test
     void dtoToModel() {
         user = IUserMapper.INSTANCE.dtoToModel(userDto);
-        assertEquals("password", user.getPassword());
+//        assertEquals("password", user.getPassword());
         assertNull(user.getPokemonMap());
     }
 
@@ -83,7 +83,7 @@ class IUserMapperTest {
     @Test
     void modelToEntity() {
         user = IUserMapper.INSTANCE.dtoToModel(userDto);
-        assertEquals("password", user.getPassword());
+//        assertEquals("password", user.getPassword());
         assertNull(user.getPokemonMap());
         user.setPassword("password");
 

@@ -8,8 +8,10 @@ import com.lam.sb_backend.exception.SBException;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IUserRepository;
 import com.lam.sb_backend.service.IUserService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,10 @@ import java.util.UUID;
 public class UserServiceImp implements IUserService {
 
     private final IUserRepository userRepository;
+
+    @Autowired
+    @Lazy
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDTO getUserById(UUID userId) {
@@ -49,5 +55,19 @@ public class UserServiceImp implements IUserService {
         user.setUserId(userId);
         UserEntity updatedUser = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(updatedUser);
+    }
+
+    @Override
+    public void updatePassword(UUID userId, String oldPassword, String newPassword) {
+        UserEntity userEntity = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new SBException(ErrorCode.USER_NOT_FOUND, "UPDATE: User Password"));
+        // password should be valid in frontend，backend check only the old password is right or wrong
+        if(!passwordEncoder.matches(oldPassword, userEntity.getPassword())){
+            throw new SBException(ErrorCode.INTERNAL_SERVER_ERROR, "UPDATE: User Passwords are not equal");
+        } else {
+            userEntity.setPassword(passwordEncoder.encode(newPassword));
+        }
+        userRepository.save(userEntity);
     }
 }
