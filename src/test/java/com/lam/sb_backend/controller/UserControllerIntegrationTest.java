@@ -137,7 +137,7 @@ class UserControllerIntegrationTest {
         UserDTO newUserDTO = new UserDTO(
                 userDTO.id(),
                 "new_username",
-                "new_password",
+//                "new_password",
                 userDTO.createdAt(),
                 "new_first_name",
                 "new_last_name",

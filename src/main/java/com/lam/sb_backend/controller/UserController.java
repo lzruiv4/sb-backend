@@ -1,7 +1,7 @@
 package com.lam.sb_backend.controller;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
-import com.lam.sb_backend.domain.enums.Role;
+import com.lam.sb_backend.domain.dto.UserPasswordDTO;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,6 +41,15 @@ public class UserController {
     @Operation(summary = "Update user info", description = "Returns updated user information")
     public ResponseEntity<UserDTO> updateUser(@PathVariable("userId") UUID userId, @RequestBody UserDTO userDTO){
         return ResponseEntity.ok(iUserService.updateUser(userId, IUserMapper.INSTANCE.dtoToModel(userDTO)));
+    }
+
+    @PutMapping("/{userId}/passwordUpdate")
+    @Operation(summary = "Update user password", description = "Returns updated password successful")
+    public ResponseEntity<String> updateUserPassword(
+            @PathVariable("userId") UUID userId, @RequestBody UserPasswordDTO userPasswordDTO
+    ){
+        iUserService.updatePassword(userId, userPasswordDTO.oldPassword(), userPasswordDTO.newPassword());
+        return ResponseEntity.ok("Password updated successfully");
     }
 
     @PostMapping

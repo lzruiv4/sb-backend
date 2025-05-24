@@ -27,7 +27,7 @@ public class IPokemonRecordMapperTest {
     UserDTO userDTO = new UserDTO(
             UUID.randomUUID(),
             "username",
-            "password",
+//            "password",
             testTime,
             "firstname",
             "lastname",
