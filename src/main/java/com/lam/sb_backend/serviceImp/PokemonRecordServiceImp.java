@@ -5,11 +5,11 @@ import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.PokemonRecordEntity;
 import com.lam.sb_backend.domain.model.PokemonRecord;
 import com.lam.sb_backend.domain.model.User;
+import com.lam.sb_backend.exception.PokemonRecordNotFoundException;
 import com.lam.sb_backend.mapper.IPokemonRecordMapper;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IPokemonRecordRepository;
 import com.lam.sb_backend.service.IPokemonRecordService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +46,7 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
     @Override
     public PokemonRecordDTO changeReleaseToTrue(UUID pokemonRecordId) {
         PokemonRecordEntity pokemonRecordEntity = pokemonRecordRepository.findById(pokemonRecordId)
-                .orElseThrow(() -> new EntityNotFoundException("Pokemon record with ID : " + pokemonRecordId + " not found"));
+                .orElseThrow(() -> new PokemonRecordNotFoundException(pokemonRecordId, new Throwable("changeReleaseToTrue")));
         pokemonRecordEntity.setRelease(true);
         return IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordRepository.save(pokemonRecordEntity));
     }
