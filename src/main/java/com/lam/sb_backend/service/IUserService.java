@@ -12,8 +12,6 @@ public interface IUserService {
 
     List<UserDTO> getAllUsers();
 
-    UserDTO addNewUser(User user);
-
     UserDTO updateUser(UUID userId, User user);
 
     void updatePassword(UUID userId, String oldPassword, String newPassword);

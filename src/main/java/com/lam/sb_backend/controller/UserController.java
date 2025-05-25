@@ -7,7 +7,6 @@ import com.lam.sb_backend.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -53,17 +52,4 @@ public class UserController {
     }
 
     // TODO: add forget password
-
-    @PostMapping
-    @Deprecated
-    @Operation(
-            summary = "Create a new user",
-            description = "This api is deprecated, because one can register or login by AuthenticationController.  " +
-                    "Create an user by basic information",
-            deprecated = true
-    )
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
-        UserDTO userToBeAdd = iUserService.addNewUser(IUserMapper.INSTANCE.dtoToModel(userDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(userToBeAdd);
-    }
 }

@@ -1,13 +1,14 @@
 package com.lam.sb_backend.serviceImp;
 
 import com.lam.sb_backend.domain.dto.RechargeRecordDTO;
+import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.RechargeRecordEntity;
-import com.lam.sb_backend.domain.entity.UserEntity;
+import com.lam.sb_backend.domain.model.User;
+import com.lam.sb_backend.exception.CoinRechargeInvalidException;
 import com.lam.sb_backend.mapper.IRechargeRecordMapper;
+import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IRechargeRecordRepository;
-import com.lam.sb_backend.repository.IUserRepository;
 import com.lam.sb_backend.service.IRechargeRecordService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,28 +22,27 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
 
     private final IRechargeRecordRepository rechargeRecordRepository;
 
-    private final IUserRepository userRepository;
+    private final UserServiceImp userServiceImp;
 
     @Override
     public RechargeRecordDTO addRechargeRecord(UUID userId, int amountRecharge) {
         if(amountRecharge <= 0) {
-            throw new RuntimeException("Amount recharge must be greater than 0");
+            throw new CoinRechargeInvalidException(new Throwable("addRechargeRecord"));
         }
 
-        UserEntity userEntity = userRepository
-                .findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        UserDTO userDTO = userServiceImp.getUserById(userId);
+        User user = IUserMapper.INSTANCE.dtoToModel(userDTO);
 
         RechargeRecordEntity rechargeRecordEntity = new RechargeRecordEntity();
         rechargeRecordEntity.setAmountRecharge(amountRecharge);
-        int currentPokemonCoin = userEntity.getPokemonCoin() + amountRecharge;
-        userEntity.setPokemonCoin(currentPokemonCoin);
+        int currentPokemonCoin = user.getPokemonCoin() + amountRecharge;
+        user.setPokemonCoin(currentPokemonCoin);
         rechargeRecordEntity.setCurrentPokemonCoin(currentPokemonCoin);
-        rechargeRecordEntity.setUserEntity(userEntity);
+        rechargeRecordEntity.setUserEntity(IUserMapper.INSTANCE.modelToEntity(user));
         rechargeRecordEntity.setRechargeAt(LocalDateTime.now());
 
         RechargeRecordEntity result = rechargeRecordRepository.save(rechargeRecordEntity);
-        userRepository.save(userEntity);
+        userServiceImp.updateUser(userId, user);
         return IRechargeRecordMapper.INSTANCE.entityToDto(result);
     }
 
