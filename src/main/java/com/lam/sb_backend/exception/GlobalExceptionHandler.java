@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({UserNotFoundException.class})
     public ResponseEntity<SBResponseException> handleUserNotFoundException(RuntimeException e) {
         return new ResponseEntity<>(
-                new SBResponseException(ErrorCode.NOT_FOUND, e.getMessage(), e.getCause().toString()),
+                new SBResponseException(ErrorCode.USER_NOT_FOUND, e.getMessage(), e.getCause().toString()),
                 HttpStatus.NOT_FOUND);
     }
 
