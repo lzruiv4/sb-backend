@@ -3,8 +3,8 @@ package com.lam.sb_backend.serviceImp;
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.UserEntity;
 import com.lam.sb_backend.domain.model.User;
-import com.lam.sb_backend.exception.ErrorCode;
-import com.lam.sb_backend.exception.SBException;
+import com.lam.sb_backend.exception.PasswordUpdateTheSameAsOldException;
+import com.lam.sb_backend.exception.UserNotFoundException;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.repository.IUserRepository;
 import com.lam.sb_backend.service.IUserService;
@@ -32,7 +32,9 @@ public class UserServiceImp implements IUserService {
     public UserDTO getUserById(UUID userId) {
         return userRepository.findById(userId)
                 .map(IUserMapper.INSTANCE::entityToDto)
-                .orElseThrow(() -> new SBException(ErrorCode.USER_NOT_FOUND, "GET: User"));
+                .orElseThrow(
+                        () -> new UserNotFoundException(userId, new Throwable("getUserById"))
+                );
     }
 
     @Override
@@ -51,7 +53,7 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public UserDTO updateUser(UUID userId, User user) {
-        userRepository.findById(userId).orElseThrow(() -> new SBException(ErrorCode.USER_NOT_FOUND, "UPDATE: User"));
+        userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId, new Throwable("updateUser")));
         user.setUserId(userId);
         UserEntity updatedUser = userRepository.save(IUserMapper.INSTANCE.modelToEntity(user));
         return IUserMapper.INSTANCE.entityToDto(updatedUser);
@@ -61,13 +63,15 @@ public class UserServiceImp implements IUserService {
     public void updatePassword(UUID userId, String oldPassword, String newPassword) {
         UserEntity userEntity = userRepository
                 .findById(userId)
-                .orElseThrow(() -> new SBException(ErrorCode.USER_NOT_FOUND, "UPDATE: User Password"));
+                .orElseThrow(
+                        () -> new UserNotFoundException(userId, new Throwable("updatePassword"))
+                );
         // password should be valid in frontend，backend check only the old password is right or wrong
-        if(!passwordEncoder.matches(oldPassword, userEntity.getPassword())){
-            throw new SBException(ErrorCode.INTERNAL_SERVER_ERROR, "UPDATE: User Passwords are not equal");
+        if(passwordEncoder.matches(oldPassword, userEntity.getPassword())){
+            throw new PasswordUpdateTheSameAsOldException("updatePassword");
         } else {
             userEntity.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(userEntity);
         }
-        userRepository.save(userEntity);
     }
 }

@@ -43,7 +43,7 @@ public class UserController {
         return ResponseEntity.ok(iUserService.updateUser(userId, IUserMapper.INSTANCE.dtoToModel(userDTO)));
     }
 
-    @PutMapping("/{userId}/passwordUpdate")
+    @PutMapping("/{userId}/passwordupdate")
     @Operation(summary = "Update user password", description = "Returns updated password successful")
     public ResponseEntity<String> updateUserPassword(
             @PathVariable("userId") UUID userId, @RequestBody UserPasswordDTO userPasswordDTO
@@ -51,6 +51,8 @@ public class UserController {
         iUserService.updatePassword(userId, userPasswordDTO.oldPassword(), userPasswordDTO.newPassword());
         return ResponseEntity.ok("Password updated successfully");
     }
+
+    // TODO: add forget password
 
     @PostMapping
     @Deprecated

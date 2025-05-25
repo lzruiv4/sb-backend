@@ -5,12 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-//@RestControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-//    @ExceptionHandler(SBException.class)
-//    public ResponseEntity<SBException> handleUserNotFoundException(SBException e) {
-//        return  ResponseEntity.status(HttpStatus.NOT_FOUND)
-//                .body(new SBException(ErrorCode.USER_NOT_FOUND, e.getMessage()));
-//    }
+    @ExceptionHandler({UserNotFoundException.class})
+    public ResponseEntity<SBResponseException> handleUserNotFoundException(RuntimeException e) {
+        return new ResponseEntity<>(
+                new SBResponseException(ErrorCode.NOT_FOUND, "User not found", e.getCause().toString()),
+                HttpStatus.NOT_FOUND);
+    }
 }
