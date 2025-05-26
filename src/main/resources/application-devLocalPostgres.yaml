@@ -1,9 +1,9 @@
 spring:
     # PostgreSQL
   datasource:
-    url: jdbc:postgresql://localhost:5432/sb
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/sb  # give you local database url
+    username: sa   # give you local database username
+    password: 123  # give you local database password
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-timeout: 20000
