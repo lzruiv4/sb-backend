@@ -25,37 +25,42 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Lazy
     private RoleService roleService;
 
+    /**
+     * HttpServletRequest request ：封装客户端发送的请求信息（URL、参数、头信息等）。
+     * HttpServletResponse response ：用于给客户端返回响应。
+     * FilterChain filterChain ：过滤器链，允许请求继续往下传递给后续的过滤器或者最终的资源
+     * */
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
+    protected void doFilterInternal(HttpServletRequest requestFromClient,
+                                    HttpServletResponse responseToClient,
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String path = request.getRequestURI();
+        String path = requestFromClient.getRequestURI();
 
-        // ✅ 放行无需认证的路径（包括 Swagger 和登录注册等）
+        // Permit requests if their paths include the following
         if (path.startsWith("/swagger-ui")
                 || path.startsWith("/v3/api-docs")
                 || path.startsWith("/swagger-resources")
                 || path.startsWith("/webjars")
                 || path.equals("/swagger-ui.html")
                 || path.startsWith("/api/auth")) {
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(requestFromClient, responseToClient);
             return;
         }
 
         try {
             String token = null;
 
-            // ✅ 尝试从 Authorization Header 获取 token
-            String authHeader = request.getHeader("Authorization");
+            // try to get Authorization Header from token
+            String authHeader = requestFromClient.getHeader("Authorization");
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
             }
 
-            // ✅ 可选：尝试从 cookie 中获取 token（如果支持的话）
+            // Option：try to get token from cookie
             if (token == null) {
-                Cookie[] cookies = request.getCookies();
+                Cookie[] cookies = requestFromClient.getCookies();
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
                         if ("token".equals(cookie.getName())) {
@@ -66,34 +71,33 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 }
             }
 
-            // ✅ 如果没有 token，则直接继续 filter（匿名访问）
+            // if token is still missing, proceed with filter chain for anonymous access
             if (token == null) {
-                filterChain.doFilter(request, response);
+                filterChain.doFilter(requestFromClient, responseToClient);
                 return;
             }
 
-            // ✅ 解析并验证 token
-            String userEmail = jwtService.extractUsername(token);
-            if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = roleService.loadUserByUsername(userEmail);
+            // Parse the token and check its validity
+            String username = jwtService.extractUsername(token);
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = roleService.loadUserByUsername(username);
                 if (jwtService.isTokenValid(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
                                     null,
                                     userDetails.getAuthorities());
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(requestFromClient));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
 
-            // ✅ 最终只调用一次
-            filterChain.doFilter(request, response);
+            // call it at the end
+            filterChain.doFilter(requestFromClient, responseToClient);
 
         } catch (Exception e) {
-            // ✅ 防止异常没有处理导致 500
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Invalid JWT token: " + e.getMessage());
+            responseToClient.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            responseToClient.getWriter().write("Invalid JWT token: " + e.getMessage());
         }
     }
 }

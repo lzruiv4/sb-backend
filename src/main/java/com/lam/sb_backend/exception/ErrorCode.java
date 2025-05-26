@@ -7,6 +7,11 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
+    // Auth
+    USERNAME_OR_PASSWORD_INVALID("AUTH_401"),
+    USERNAME_NOT_FOUND("AUTH_404"),
+    USERNAME_ALREADY_EXISTS("AUTH_409"),
+
     // User
     USER_NOT_FOUND("USER_404"),
 
