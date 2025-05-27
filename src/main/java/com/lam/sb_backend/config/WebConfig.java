@@ -10,8 +10,13 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
+                        // for angular
                         "http://localhost:4200",
-                        "http://192.168.0.160:4200"
+                        "http://192.168.0.160:4200",
+                        // for uni-app
+                        "http://localhost:5173",
+                        // for vue
+                        "http://localhost:9000"
                 )
                 .allowedMethods("*")
                 .allowedHeaders("*")
