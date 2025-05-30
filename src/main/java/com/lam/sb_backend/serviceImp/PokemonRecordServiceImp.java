@@ -53,8 +53,14 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
 
     @Override
     public List<PokemonRecordDTO> getPokemonRecordsByUserId(UUID userId) {
+        return getAllPokemonRecords().stream()
+                .filter(pokemonRecordDTO -> pokemonRecordDTO.userId().equals(userId))
+                .toList();
+    }
+
+    @Override
+    public List<PokemonRecordDTO> getAllPokemonRecords() {
         return pokemonRecordRepository.findAll().stream()
-                .filter(pokemonRecordEntity -> pokemonRecordEntity.getUserEntity().getUserId().equals(userId))
                 .map(IPokemonRecordMapper.INSTANCE::entityToDto)
                 .toList();
     }

@@ -48,10 +48,13 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
 
     @Override
     public List<RechargeRecordDTO> getAllRechargeRecordByUserId(UUID userId) {
+        return getAllRechargeRecords().stream()
+                .filter(rechargeRecordDTO -> rechargeRecordDTO.userId().equals(userId)).toList();
+    }
+
+    @Override
+    public List<RechargeRecordDTO> getAllRechargeRecords() {
         return rechargeRecordRepository.findAll().stream()
-                .filter(
-                        rechargeRecordEntity
-                                -> rechargeRecordEntity.getUserEntity().getUserId().equals(userId))
                 .map(IRechargeRecordMapper.INSTANCE::entityToDto)
                 .toList();
     }

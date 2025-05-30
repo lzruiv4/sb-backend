@@ -10,4 +10,6 @@ public interface IRechargeRecordService {
     RechargeRecordDTO addRechargeRecord(UUID userId, int amountRecharge);
 
     List<RechargeRecordDTO> getAllRechargeRecordByUserId(UUID userId);
+
+    List<RechargeRecordDTO> getAllRechargeRecords();
 }
