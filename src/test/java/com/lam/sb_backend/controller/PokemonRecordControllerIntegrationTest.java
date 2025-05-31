@@ -115,7 +115,7 @@ class PokemonRecordControllerIntegrationTest {
     @Test
     void testUpdateAPokemonRecord(){
         PokemonRecordDTO pokemonRecordDTO = testRestTemplate.exchange(
-                        "/api/pokemonRecords?userId=" + userDTO.id(),
+                        "/api/pokemonRecords/" + userDTO.id(),
                         HttpMethod.GET,
                         withToken,
                         new ParameterizedTypeReference<List<PokemonRecordDTO>>() {}
@@ -124,7 +124,7 @@ class PokemonRecordControllerIntegrationTest {
 
         // Update pokemon record release to true
         PokemonRecordDTO result = testRestTemplate.exchange(
-                "/api/pokemonRecords/" + pokemonRecordDTO.id(),
+                "/api/pokemonRecords/" + pokemonRecordDTO.id() + "/release",
                 HttpMethod.PUT,
                 withToken,
                 PokemonRecordDTO.class

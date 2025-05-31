@@ -4,11 +4,29 @@ import com.lam.sb_backend.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.List;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    // Bad request
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<SBResponseExceptionDTO>> handleValidationExceptions(MethodArgumentNotValidException e) {
+        List<SBResponseExceptionDTO> errorResponses = e.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> new SBResponseExceptionDTO(
+                        ErrorCode.INPUT_BAD_REQUEST,
+                        error.getField(),
+                        error.getDefaultMessage()
+                ))
+                .toList();
+        return ResponseEntity.badRequest().body(errorResponses);
+    }
 
     // Authentication
     @ExceptionHandler({AuthUsernameNotFoundException.class})

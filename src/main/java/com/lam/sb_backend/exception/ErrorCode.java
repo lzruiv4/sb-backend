@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
     // Auth
+    INPUT_BAD_REQUEST("AUTH_400"),
     USERNAME_OR_PASSWORD_INVALID("AUTH_401"),
     USERNAME_NOT_FOUND("AUTH_404"),
     USERNAME_ALREADY_EXISTS("AUTH_409"),

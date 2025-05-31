@@ -23,11 +23,11 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
 
     private final IPokemonRecordRepository pokemonRecordRepository;
 
-    private final UserServiceImp userService;
+    private final UserServiceImp userServiceImp;
 
     @Override
     public PokemonRecordDTO createPokemonRecord(String pokemonId, UUID userId) {
-        UserDTO currentUserDTO = userService.getUserById(userId);
+        UserDTO currentUserDTO = userServiceImp.getUserById(userId);
         User currentUser = IUserMapper.INSTANCE.dtoToModel(currentUserDTO);
         int currentCoin = currentUser.getPokemonCoin();
         currentUser.setPokemonCoin(currentCoin - 1);
@@ -38,16 +38,30 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
         pokemonRecord.setUser(currentUser);
         pokemonRecord.setRelease(false);
 
-        PokemonRecordEntity result = pokemonRecordRepository.save(IPokemonRecordMapper.INSTANCE.modelToEntity(pokemonRecord));
-        userService.updateUser(userId, currentUser);
+        PokemonRecordEntity result = pokemonRecordRepository.save(
+                IPokemonRecordMapper.INSTANCE.modelToEntity(pokemonRecord));
+        userServiceImp.updateUser(userId, currentUser);
         return IPokemonRecordMapper.INSTANCE.entityToDto(result);
     }
 
     @Override
     public PokemonRecordDTO changeReleaseToTrue(UUID pokemonRecordId) {
         PokemonRecordEntity pokemonRecordEntity = pokemonRecordRepository.findById(pokemonRecordId)
-                .orElseThrow(() -> new PokemonRecordNotFoundException(pokemonRecordId, new Throwable("changeReleaseToTrue")));
+                .orElseThrow(() -> new PokemonRecordNotFoundException(
+                        pokemonRecordId,
+                        new Throwable("changeReleaseToTrue")));
         pokemonRecordEntity.setRelease(true);
+        return IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordRepository.save(pokemonRecordEntity));
+    }
+
+    @Override
+    public PokemonRecordDTO updatePokemonRecord(UUID pokemonRecordId, PokemonRecord pokemonRecord) {
+        PokemonRecordEntity pokemonRecordEntity = pokemonRecordRepository.findById(pokemonRecordId)
+                .orElseThrow(() -> new PokemonRecordNotFoundException(
+                        pokemonRecordId,
+                        new Throwable("updatePokemonRecord"))
+                );
+        //TODO: check rechargeRecordDTO valid or check the change
         return IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordRepository.save(pokemonRecordEntity));
     }
 

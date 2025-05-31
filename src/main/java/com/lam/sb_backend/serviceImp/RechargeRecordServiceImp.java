@@ -3,6 +3,7 @@ package com.lam.sb_backend.serviceImp;
 import com.lam.sb_backend.domain.dto.RechargeRecordDTO;
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.entity.RechargeRecordEntity;
+import com.lam.sb_backend.domain.model.RechargeRecord;
 import com.lam.sb_backend.domain.model.User;
 import com.lam.sb_backend.exception.CoinRechargeInvalidException;
 import com.lam.sb_backend.mapper.IRechargeRecordMapper;
@@ -43,6 +44,14 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
 
         RechargeRecordEntity result = rechargeRecordRepository.save(rechargeRecordEntity);
         userServiceImp.updateUser(userId, user);
+        return IRechargeRecordMapper.INSTANCE.entityToDto(result);
+    }
+
+    @Override
+    public RechargeRecordDTO updateRechargeRecord(UUID userId, RechargeRecord rechargeRecord) {
+        UserDTO userDTO = userServiceImp.getUserById(userId);
+        //TODO: check rechargeRecordDTO valid or check the change
+        RechargeRecordEntity result = rechargeRecordRepository.save(IRechargeRecordMapper.INSTANCE.modelToEntity(rechargeRecord));
         return IRechargeRecordMapper.INSTANCE.entityToDto(result);
     }
 
