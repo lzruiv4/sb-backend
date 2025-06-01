@@ -61,7 +61,10 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
                         pokemonRecordId,
                         new Throwable("updatePokemonRecord"))
                 );
-        //TODO: check rechargeRecordDTO valid or check the change
+        // TODO: check rechargeRecordDTO valid or check the change
+        // UserEntity can not be changed here
+        pokemonRecordEntity.setPokemonId(pokemonRecord.getPokemonId());
+        pokemonRecordEntity.setCaptureTime(pokemonRecord.getCaptureTime());
         return IPokemonRecordMapper.INSTANCE.entityToDto(pokemonRecordRepository.save(pokemonRecordEntity));
     }
 
