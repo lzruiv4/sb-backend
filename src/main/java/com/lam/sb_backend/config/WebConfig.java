@@ -16,7 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
                         // for uni-app
                         "http://localhost:5173",
                         // for vue
-                        "http://localhost:9000"
+                        "http://localhost:9000",
+                        "http://192.168.0.160:9000"
                 )
                 .allowedMethods("*")
                 .allowedHeaders("*")
