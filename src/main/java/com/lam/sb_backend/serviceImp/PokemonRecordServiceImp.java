@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -78,6 +79,7 @@ public class PokemonRecordServiceImp implements IPokemonRecordService {
     @Override
     public List<PokemonRecordDTO> getAllPokemonRecords() {
         return pokemonRecordRepository.findAll().stream()
+                .sorted(Comparator.comparing(PokemonRecordEntity::getCaptureTime).reversed())
                 .map(IPokemonRecordMapper.INSTANCE::entityToDto)
                 .toList();
     }

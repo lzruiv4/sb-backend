@@ -2,6 +2,7 @@ package com.lam.sb_backend.serviceImp;
 
 import com.lam.sb_backend.domain.dto.RechargeRecordDTO;
 import com.lam.sb_backend.domain.dto.UserDTO;
+import com.lam.sb_backend.domain.entity.PokemonRecordEntity;
 import com.lam.sb_backend.domain.entity.RechargeRecordEntity;
 import com.lam.sb_backend.domain.model.RechargeRecord;
 import com.lam.sb_backend.domain.model.User;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,12 +60,14 @@ public class RechargeRecordServiceImp implements IRechargeRecordService {
     @Override
     public List<RechargeRecordDTO> getAllRechargeRecordByUserId(UUID userId) {
         return getAllRechargeRecords().stream()
-                .filter(rechargeRecordDTO -> rechargeRecordDTO.userId().equals(userId)).toList();
+                .filter(rechargeRecordDTO -> rechargeRecordDTO.userId().equals(userId))
+                .toList();
     }
 
     @Override
     public List<RechargeRecordDTO> getAllRechargeRecords() {
         return rechargeRecordRepository.findAll().stream()
+                .sorted(Comparator.comparing(RechargeRecordEntity::getRechargeAt).reversed())
                 .map(IRechargeRecordMapper.INSTANCE::entityToDto)
                 .toList();
     }

@@ -1,6 +1,7 @@
 package com.lam.sb_backend.serviceImp;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
+import com.lam.sb_backend.domain.entity.PokemonRecordEntity;
 import com.lam.sb_backend.domain.entity.UserEntity;
 import com.lam.sb_backend.domain.model.User;
 import com.lam.sb_backend.exception.PasswordInvalidException;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +42,7 @@ public class UserServiceImp implements IUserService {
     @Override
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
+                .sorted(Comparator.comparing(UserEntity::getCreatedAt).reversed())
                 .map(IUserMapper.INSTANCE::entityToDto)
                 .toList();
     }
