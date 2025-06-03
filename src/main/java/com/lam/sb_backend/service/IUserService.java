@@ -1,6 +1,8 @@
 package com.lam.sb_backend.service;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterResponseDTO;
 import com.lam.sb_backend.domain.model.User;
 
 import java.util.List;
@@ -11,6 +13,8 @@ public interface IUserService {
     UserDTO getUserById(UUID userId);
 
     List<UserDTO> getAllUsers();
+
+    UserRegisterResponseDTO register(UserRegisterDTO userRegisterDTO);
 
     UserDTO updateUser(UUID userId, User user);
 

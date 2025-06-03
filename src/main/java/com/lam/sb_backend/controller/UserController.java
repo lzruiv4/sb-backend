@@ -2,6 +2,8 @@ package com.lam.sb_backend.controller;
 
 import com.lam.sb_backend.domain.dto.UserDTO;
 import com.lam.sb_backend.domain.dto.UserPasswordDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterDTO;
+import com.lam.sb_backend.domain.dto.UserRegisterResponseDTO;
 import com.lam.sb_backend.mapper.IUserMapper;
 import com.lam.sb_backend.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +23,13 @@ import java.util.UUID;
 public class UserController {
 
     private final IUserService iUserService;
+
+    @PostMapping("/register")
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Add new user", description = "Returns new user information, only for admin")
+    public ResponseEntity<UserRegisterResponseDTO> register(@RequestBody UserRegisterDTO userRegisterDTO) {
+        return ResponseEntity.ok(iUserService.register(userRegisterDTO));
+    }
 
     @GetMapping("/{userId}")
     @Operation(summary = "Get user info by userId", description = "Returns basic user information")

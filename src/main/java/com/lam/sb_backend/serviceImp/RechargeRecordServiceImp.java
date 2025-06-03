@@ -2,7 +2,6 @@ package com.lam.sb_backend.serviceImp;
 
 import com.lam.sb_backend.domain.dto.RechargeRecordDTO;
 import com.lam.sb_backend.domain.dto.UserDTO;
-import com.lam.sb_backend.domain.entity.PokemonRecordEntity;
 import com.lam.sb_backend.domain.entity.RechargeRecordEntity;
 import com.lam.sb_backend.domain.model.RechargeRecord;
 import com.lam.sb_backend.domain.model.User;
